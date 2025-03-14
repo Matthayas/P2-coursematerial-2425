@@ -7,7 +7,7 @@ def time():
     return Time(0, 0, 0)
 
 
-@pytest.mark.parametrize("hours", [0, 4, 23])
+@pytest.mark.parametrize("value", [0, 4, 23])
 @pytest.mark.parametrize("minutes", [0, 12, 59])
 @pytest.mark.parametrize("seconds", [0, 12, 59])
 def test_constructor_valid_values(hours, minutes, seconds):
@@ -18,7 +18,7 @@ def test_constructor_valid_values(hours, minutes, seconds):
     assert time.seconds == seconds
 
 
-@pytest.mark.parametrize("hours, minutes, seconds", [
+@pytest.mark.parametrize("value, minutes, seconds", [
     (-1, 0, 0),
     (24, 0, 0),
     (0, -1, 0),
@@ -32,7 +32,7 @@ def test_constructor_invalid_values(hours, minutes, seconds):
 
 
 
-@pytest.mark.parametrize("hours", list(range(0, 24)))
+@pytest.mark.parametrize("value", list(range(0, 24)))
 def test_set_valid_hours(time, hours):
     time.hours = hours
     assert time.hours == hours
@@ -50,7 +50,7 @@ def test_set_valid_seconds(time, seconds):
     assert time.seconds == seconds
 
 
-@pytest.mark.parametrize("hours", [-4, -1, 24, 29])
+@pytest.mark.parametrize("value", [-4, -1, 24, 29])
 def test_set_invalid_hours(time, hours):
     with pytest.raises(ValueError):
         time.hours = hours
